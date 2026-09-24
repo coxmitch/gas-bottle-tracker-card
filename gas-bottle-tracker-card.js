@@ -411,15 +411,10 @@ class GasBottleTracker extends HTMLElement {
 
         .bottle-wrapper {
           position: relative;
-
           width: 150px;
-
-          height: 270px;
-
+          height: 288px;
           margin: 0 auto;
-
-          flex:
-            0 0 150px;
+          flex: 0 0 150px;
         }
 
         /* Valve */
@@ -998,3 +993,142 @@ class GasBottleTracker extends HTMLElement {
 
             <div class="label">
               Bottle Age
+            </div>
+
+            <div class="value">
+              ${age} days
+            </div>
+
+          </div>
+
+          <div class="detail">
+
+            <div class="label">
+              Average Lifespan
+            </div>
+
+            <div class="value">
+              ${lifespan} days
+            </div>
+
+          </div>
+
+          <div class="detail">
+
+            <div class="label">
+              Next Change
+            </div>
+
+            <div class="value">
+              ${nextChange}
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- SPARES -->
+
+        <div class="spares">
+
+          <div>
+
+            <div class="label">
+              Spare Bottles
+            </div>
+
+            <div class="value">
+              ${spare}
+            </div>
+
+          </div>
+
+          <div
+            class="spare-buttons"
+          >
+
+            <button
+              id="remove-spare"
+            >
+              −
+            </button>
+
+            <button
+              id="add-spare"
+            >
+              +
+            </button>
+
+          </div>
+
+        </div>
+
+        <!-- NEW BOTTLE -->
+
+        <button
+          class="new-bottle"
+          id="new-bottle"
+        >
+          New Bottle
+        </button>
+
+      </ha-card>
+    `;
+
+    const addButton =
+      this.shadowRoot.querySelector(
+        "#add-spare"
+      );
+
+    const removeButton =
+      this.shadowRoot.querySelector(
+        "#remove-spare"
+      );
+
+    const newBottleButton =
+      this.shadowRoot.querySelector(
+        "#new-bottle"
+      );
+
+    addButton.addEventListener(
+      "click",
+      () => this.addSpare()
+    );
+
+    removeButton.addEventListener(
+      "click",
+      () => this.removeSpare()
+    );
+
+    newBottleButton.addEventListener(
+      "click",
+      () =>
+        this.showNewBottleDialog()
+    );
+  }
+}
+
+if (
+  !customElements.get(
+    "gas-bottle-tracker-card"
+  )
+) {
+  customElements.define(
+    "gas-bottle-tracker-card",
+    GasBottleTracker
+  );
+}
+
+window.customCards =
+  window.customCards || [];
+
+window.customCards.push({
+  type:
+    "gas-bottle-tracker-card",
+
+  name:
+    "Gas Bottle Tracker Card",
+
+  description:
+    "Gas bottle usage and replacement tracker",
+});
